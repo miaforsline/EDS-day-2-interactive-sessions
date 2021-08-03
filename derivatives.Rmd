@@ -35,5 +35,9 @@ dg_dx <- D(expr = gx, name = "x")
 x <- seq(from = -10, to = 10, by = 0.5) 
 eval(expr = dg_dx)
 #We can also evaluate derivatives by a sequence of numbers - aka the slopes of the tangent lines of the function from -10 to +10 by 0.5 increments 
+
+#usethis::use_git() -> get Git tab 
+#usethis::use_github() -> set up online repository 
+#stage --> commit --> pull --> push 
 ```
 
