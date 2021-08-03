@@ -1,0 +1,83 @@
+---
+title: "LaTeX"
+author: "Mia Forsline"
+date: "8/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(palmerpenguins)
+```
+
+## Plot a function in `ggplot2`
+```{r}
+#use def in python 
+eq <- function(x) {
+  3 * (x ^ 2) + 4
+}
+
+
+#use stat_function() to tell ggplot what function we want to plot + the range over which we're plotting it. 
+#create a data frame for ggplot to indicate the x range/endpoints 
+
+ggplot(data = data.frame(x = c(1,100)), aes(x = x)) + 
+  stat_function(fun = eq)
+
+```
+
+
+### LaTeX to format forumulas 
+Plot $f(x) = 2.4-5x^3+2.1x^2$ from -50 to 50 
+```{r}
+eq2 <- function(x) {
+  2.4 - 5 * (x^3) + 2.1 * (x^2)
+}
+
+ggplot(data = NULL) + 
+  stat_function(fun = eq2)+ 
+  xlim(-50, 50)
+```
+### Plot `penguins` body mass and flipper lengths 
+```{r}
+ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g))+ 
+  geom_point(aes(color = species, shape = species))+ 
+  scale_color_manual(values = c("red", "purple", "royal blue"))+
+  theme_classic()+
+  labs(x = "Flipper Length (mm)",
+       y = "Body Mass (g)", 
+       color = "Penguin Species", 
+       shape = "Penguin Species",
+       title = "Palmer penguins size measurements",
+       caption = "Data collected by KB Gorman et al. at Palmer Station") +
+  facet_wrap(.~island)
+
+#positive correlation, linear relationship between flipper length and body mass, few outliers, homostadastic (equal spread of data across the model), data clusters
+
+#command + shift + C to comment out multiple lines 
+```
+### Higher order derivative 
+```{r}
+gt <- expression(2.2 + (3.1 * t) - (5.6 * t^4))
+#1st derivative 
+dg_dt <- D(expr = gt, 't')
+dg_dt
+
+#2nd derivative 
+d2g_dt2 <- D(expr = dg_dt, 't')
+d2g_dt2
+```
+
+### Partial derivatives 
+```{r}
+f_xyz <- expression(2 * x * y - 3 * (x^2) * (z^3))
+df_dx <- D(expr = f_xyz, name = 'x')
+df_dx
+df_dy <- D(expr = f_xyz, name = 'y')
+df_dy
+df_dz <- D(expr = f_xyz, name = 'z')
+df_dz
+
+```
+
