@@ -1,0 +1,39 @@
+---
+title: "Interactive-session-2a"
+author: "Mia Forsline"
+date: "8/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Derivatives in R
+
+```{r}
+fx <- expression(x^2)
+#expression command tells R x^2 is not a value 
+
+df_dx <- D(expr = fx, name = "x") 
+#name = the variable to take the derivative with respect to (important for multivariate derivatives)
+
+df_dx
+
+#Evaluate the slope of f(x) at x = 831
+
+x <- 831 
+eval(expr = df_dx) #evaluates the expression based on what value we assigned x
+```
+
+```{r}
+gt <- expression (3 * t^2 * 4 * cos(t))
+dg_dt <- D(expr = gt, name = "t") #take derivative w/respect to t
+
+gx <- expression(2*x^2)
+dg_dx <- D(expr = gx, name = "x")
+x <- seq(from = -10, to = 10, by = 0.5) 
+eval(expr = dg_dx)
+#We can also evaluate derivatives by a sequence of numbers - aka the slopes of the tangent lines of the function from -10 to +10 by 0.5 increments 
+```
+
